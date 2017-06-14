@@ -1,0 +1,26 @@
+{
+    "name": "msng/values",
+    "description": "Value object templates for PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Masunaga Ray",
+            "email": "ray@msng.info"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "msng\\Values\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "msng\\Values\\Tests\\": "tests"
+        }
+    }
+}
