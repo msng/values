@@ -88,6 +88,14 @@ class StringValueTest extends TestCase
         echo $stringValue;
     }
 
+    /**
+     * @expectedException \LengthException
+     */
+    public function testMultiByteStringIsCountedInByte()
+    {
+        new SampleStringValue('いろはにほへと');
+    }
+
     private function newAndAssertSame($value)
     {
         $string = new SampleStringValue($value);
