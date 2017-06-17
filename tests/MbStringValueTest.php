@@ -4,6 +4,7 @@ namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleMbStringValue;
 use msng\Values\Tests\SampleClasses\SampleSjisMbStringValue;
+use msng\Values\Tests\SampleClasses\SampleTruncatedMbStringValue;
 use PHPUnit\Framework\TestCase;
 
 class MbStringValueTest extends TestCase
@@ -72,13 +73,14 @@ class MbStringValueTest extends TestCase
         $this->assertSame($sjis, $stringValue->get());
     }
 
-//    /**
-//     * @expectedException \LengthException
-//     */
-//    public function testDifferentEncodingsTooLong()
-//    {
-//        $value = '文字コードのテストです';
-//        $stringValue = new SampleSjisMbStringValue($value);
-//    }
+    public function testTruncatedString()
+    {
+        $value = 'いろはにほへとちりぬるを';
+        $expected = 'いろはにほへとち';
+
+        $stringValue = new SampleTruncatedMbStringValue($value);
+
+        $this->assertSame($expected, $stringValue->get());
+    }
 
 }

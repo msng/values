@@ -2,11 +2,13 @@
 
 namespace msng\Values;
 
+use msng\Values\Traits\Truncate;
 use msng\Values\Traits\ValidateLength;
 
 abstract class StringValue extends ScalarValue
 {
     use ValidateLength;
+    use Truncate;
 
     /**
      * @var string
@@ -31,6 +33,10 @@ abstract class StringValue extends ScalarValue
     {
         if (is_scalar($value)) {
             $value = (string)$value;
+
+            if ($this->truncate) {
+                $value = $this->truncate($value);
+            }
         }
 
         return $value;

@@ -3,6 +3,7 @@ namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleStrictStringValue;
 use msng\Values\Tests\SampleClasses\SampleStringValue;
+use msng\Values\Tests\SampleClasses\SampleTruncatedStringValue;
 use PHPUnit\Framework\TestCase;
 
 class StringValueTest extends TestCase
@@ -106,6 +107,16 @@ class StringValueTest extends TestCase
     public function testMultiByteStringIsCountedInBytes()
     {
         new SampleStringValue('いろはにほへと');
+    }
+
+    public function testTruncatedString()
+    {
+        $value = 'abcdefghijklmn';
+        $expected = 'abcdefgh';
+
+        $stringValue = new SampleTruncatedStringValue($value);
+
+        $this->assertSame($expected, $stringValue->get());
     }
 
 }

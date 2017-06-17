@@ -2,6 +2,7 @@
 
 namespace msng\Values;
 
+use msng\Values\Traits\Truncate;
 use msng\Values\Traits\ValidateLength;
 
 abstract class IntegerValue extends ScalarValue
@@ -33,9 +34,10 @@ abstract class IntegerValue extends ScalarValue
      */
     protected function setFilter($value)
     {
-        return filter_var($value, FILTER_VALIDATE_INT);
-    }
+        $value = filter_var($value, FILTER_VALIDATE_INT);
 
+        return $value;
+    }
 
     /**
      * @param string|int $value
@@ -43,6 +45,7 @@ abstract class IntegerValue extends ScalarValue
     protected function validate($value)
     {
         parent::validate($value);
+
         $this->validateLength($value);
     }
 

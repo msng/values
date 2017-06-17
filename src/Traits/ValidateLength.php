@@ -24,6 +24,15 @@ trait ValidateLength
     protected $maxLength;
 
     /**
+     * Too long string is automatically truncated or not
+     *  - true : $value is truncated to the length of $maxLength
+     *  - false : LengthException is thrown if $value is longer than $maxLength
+     *
+     * @var bool
+     */
+    protected $truncate = false;
+
+    /**
      * @param $value
      */
     private function validateLength($value)
@@ -49,7 +58,7 @@ trait ValidateLength
      */
     private function validateMaxLength($value)
     {
-        if ($this->maxLength) {
+        if ($this->truncate === false && $this->maxLength) {
             if ($this->strlen($value) > $this->maxLength) {
                 throw new \LengthException(sprintf('The maximum length of the value for %s is %d; "%s" given.', __CLASS__, $this->maxLength, $value));
             }
