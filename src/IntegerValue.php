@@ -3,7 +3,6 @@
 namespace msng\Values;
 
 use msng\Values\Traits\ValidateLength;
-use msng\Values\Traits\ValidateType;
 
 abstract class IntegerValue extends ScalarValue
 {
