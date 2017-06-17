@@ -1,6 +1,7 @@
 <?php
 namespace msng\Values\Tests;
 
+use msng\Values\Tests\SampleClasses\SampleStrictStringValue;
 use msng\Values\Tests\SampleClasses\SampleStringValue;
 use PHPUnit\Framework\TestCase;
 
@@ -8,16 +9,25 @@ class StringValueTest extends TestCase
 {
     public function testJustMaxLength()
     {
-        $this->newAndAssertSame('abcdefgh');
+        $value = 'abcdefgh';
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     public function testJustMinLength()
     {
-        $this->newAndAssertSame('abcdef');
+        $value = 'abcdef';
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     public function testBetweenMinAndMaxLength() {
-        $this->newAndAssertSame('abcdefg');
+        $value = 'abcdefg';
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -25,7 +35,10 @@ class StringValueTest extends TestCase
      */
     public function testOverMaxLength()
     {
-        $this->newAndAssertSame('abcdefghi');
+        $value = 'abcdefghi';
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -33,7 +46,10 @@ class StringValueTest extends TestCase
      */
     public function testUnderMinLength()
     {
-        $this->newAndAssertSame('abcde');
+        $value = 'abcde';
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -41,7 +57,10 @@ class StringValueTest extends TestCase
      */
     public function testArray()
     {
-        $this->newAndAssertSame(['a', 'b']);
+        $value = ['a', 'b'];
+        $string = new SampleStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -49,17 +68,10 @@ class StringValueTest extends TestCase
      */
     public function testObject()
     {
-        $this->newAndAssertSame(new \stdClass());
-    }
+        $value = new \stdClass();
+        $string = new SampleStringValue($value);
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testIntegerWithDefaultStrictMode()
-    {
-        SampleStringValue::setDefaultTypeCheckMode(SampleStringValue::TYPE_CHECK_STRICT);
-
-        new SampleStringValue(1234567);
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -67,13 +79,13 @@ class StringValueTest extends TestCase
      */
     public function testIntegerWithStrictMode()
     {
-        new SampleStringValue(1234567, SampleStringValue::TYPE_CHECK_STRICT);
+        new SampleStrictStringValue(1234567);
     }
 
     public function testIntegerWithLooseMode()
     {
         $value = 1234567;
-        $string = new SampleStringValue($value, SampleStringValue::TYPE_CHECK_LOOSE);
+        $string = new SampleStringValue($value);
 
         $this->assertEquals($value, $string->get());
     }
@@ -86,13 +98,6 @@ class StringValueTest extends TestCase
         $stringValue = new SampleStringValue($value);
 
         echo $stringValue;
-    }
-
-    private function newAndAssertSame($value)
-    {
-        $string = new SampleStringValue($value);
-
-        $this->assertSame($value, $string->get());
     }
 
 }

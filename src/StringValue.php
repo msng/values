@@ -8,12 +8,22 @@ abstract class StringValue extends ScalarValue
 {
     use ValidateLength;
 
+    /**
+     * @var string
+     */
     protected $type = 'string';
 
-    public function __construct($value, $typeCheckMode = null)
-    {
-        $this->prepareTypeCheck($typeCheckMode);
+    /**
+     * @var bool
+     */
+    protected $typeCheck = self::TYPE_CHECK_LOOSE;
 
+    /**
+     * StringValue constructor.
+     * @param mixed $value
+     */
+    public function __construct($value)
+    {
         parent::__construct($value);
     }
 

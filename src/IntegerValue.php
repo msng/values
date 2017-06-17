@@ -8,17 +8,22 @@ abstract class IntegerValue extends ScalarValue
 {
     use ValidateLength;
 
+    /**
+     * @var string
+     */
     protected $type = 'integer';
+
+    /**
+     * @var bool
+     */
+    protected $typeCheck = self::TYPE_CHECK_LOOSE;
 
     /**
      * IntegerValue constructor.
      * @param int|string $value
-     * @param bool|null $typeCheckMode
      */
-    public function __construct($value, $typeCheckMode = null)
+    public function __construct($value)
     {
-        $this->prepareTypeCheck($typeCheckMode);
-
         parent::__construct($value);
     }
 
