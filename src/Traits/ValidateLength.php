@@ -4,6 +4,11 @@ namespace msng\Values\Traits;
 trait ValidateLength
 {
     /**
+     * @var bool
+     */
+    protected $multiByte = false;
+
+    /**
      * @var int|null
      */
     protected $minLength;
@@ -28,7 +33,7 @@ trait ValidateLength
     private function validateMinLength($value)
     {
         if ($this->minLength) {
-            if (strlen($value) < $this->minLength) {
+            if ($this->strlen($value) < $this->minLength) {
                 throw new \LengthException(sprintf('The minimum length of the value for %s is %d; "%s" given.', __CLASS__, $this->minLength, $value));
             }
         }
@@ -40,9 +45,42 @@ trait ValidateLength
     private function validateMaxLength($value)
     {
         if ($this->maxLength) {
-            if (strlen($value) > $this->maxLength) {
+            if ($this->strlen($value) > $this->maxLength) {
                 throw new \LengthException(sprintf('The maximum length of the value for %s is %d; "%s" given.', __CLASS__, $this->maxLength, $value));
             }
+        }
+    }
+
+    /**
+     * @param $value
+     * @return int
+     */
+    private function strlen($value)
+    {
+        if ($this->isMultiByte()) {
+            return mb_strlen($value, $this->getEncoding());
+        } else {
+            return strlen($value);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isMultiByte()
+    {
+        return $this->multiByte;
+    }
+
+    /**
+     * @return string
+     */
+    private function getEncoding()
+    {
+        if (empty($this->encoding)) {
+            return mb_internal_encoding();
+        } else {
+            return $this->encoding;
         }
     }
 }

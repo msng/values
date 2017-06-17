@@ -100,4 +100,12 @@ class StringValueTest extends TestCase
         echo $stringValue;
     }
 
+    /**
+     * @expectedException \LengthException
+     */
+    public function testMultiByteStringIsCountedInBytes()
+    {
+        new SampleStringValue('いろはにほへと');
+    }
+
 }
