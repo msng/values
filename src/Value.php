@@ -25,6 +25,7 @@ abstract class Value
     {
         $this->validate($value);
         $value = $this->setFilter($value);
+
         $this->value = $value;
     }
 

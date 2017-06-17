@@ -4,16 +4,6 @@ namespace msng\Values\Traits;
 trait ValidateLength
 {
     /**
-     * @var bool
-     */
-    protected $multiByte = false;
-
-    /**
-     * @var string|null
-     */
-    protected $encoding;
-
-    /**
      * @var int|null
      */
     protected $minLength;
@@ -22,15 +12,6 @@ trait ValidateLength
      * @var int|null
      */
     protected $maxLength;
-
-    /**
-     * Too long string is automatically truncated or not
-     *  - true : $value is truncated to the length of $maxLength
-     *  - false : LengthException is thrown if $value is longer than $maxLength
-     *
-     * @var bool
-     */
-    protected $truncate = false;
 
     /**
      * @param $value
@@ -58,7 +39,7 @@ trait ValidateLength
      */
     private function validateMaxLength($value)
     {
-        if ($this->truncate === false && $this->maxLength) {
+        if ($this->maxLength) {
             if ($this->strlen($value) > $this->maxLength) {
                 throw new \LengthException(sprintf('The maximum length of the value for %s is %d; "%s" given.', __CLASS__, $this->maxLength, $value));
             }
@@ -69,28 +50,9 @@ trait ValidateLength
      * @param $value
      * @return int
      */
-    private function strlen($value)
+    protected function strlen($value)
     {
-        if ($this->isMultiByte()) {
-            return mb_strlen($value, $this->getEncoding());
-        } else {
-            return strlen($value);
-        }
+        return strlen($value);
     }
 
-    /**
-     * @return bool
-     */
-    private function isMultiByte()
-    {
-        return $this->multiByte;
-    }
-
-    /**
-     * @return string
-     */
-    private function getEncoding()
-    {
-        return $this->encoding;
-    }
 }

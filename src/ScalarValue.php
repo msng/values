@@ -36,7 +36,7 @@ abstract class ScalarValue extends Value
             throw new \InvalidArgumentException(sprintf('The value for %s must be %s; %s given.', get_class($this), $this->type, gettype($value)));
         }
 
-        $filteredValue = $this->Setfilter($value);
+        $filteredValue = $this->setfilter($value);
 
         if (gettype($filteredValue) !== $this->type) {
             throw new \InvalidArgumentException(sprintf('Invalid argument for %s.', get_class($this)));

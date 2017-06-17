@@ -4,10 +4,22 @@ namespace msng\Values;
 
 class MbStringValue extends StringValue
 {
+    const COUNT_BYTE = 1;
+    const COUNT_MULTI_BYTE = 2;
+
     /**
-     * @var bool
+     * How characters are counted at length validation or truncate
+     *  - self::COUNT_MULTI_BYTE : count characters as multi-byte
+     *  - self::COUNT_BYTE : count in bytes
+     *
+     * @var int
      */
-    protected $multiByte = true;
+    protected $count = self::COUNT_MULTI_BYTE;
+
+    /**
+     * @var string
+     */
+    protected $encoding;
 
     /**
      * MbStringValue constructor.
@@ -38,5 +50,44 @@ class MbStringValue extends StringValue
 
         return $encoding;
     }
+
+    /**
+     * @param $value
+     * @return int
+     */
+    protected function strlen($value)
+    {
+        if ($this->count === self::COUNT_MULTI_BYTE) {
+            return mb_strlen($value, $this->getEncoding());
+        } else {
+            return strlen($value);
+        }
+    }
+
+    /**
+     * @param mixed $value
+     * @param int $start
+     * @param null $length
+     * @return bool|mixed|string
+     */
+    protected function substr($value, $start, $length = null)
+    {
+        if ($this->count === self::COUNT_MULTI_BYTE) {
+            $value = mb_substr($value, 0, $this->maxLength, $this->getEncoding());
+        } else {
+            $value = substr($value, 0, $this->maxLength);
+        }
+
+        return $value;
+    }
+
+    /**
+     * @return string
+     */
+    private function getEncoding()
+    {
+        return $this->encoding;
+    }
+
 
 }
