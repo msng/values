@@ -9,6 +9,11 @@ trait ValidateLength
     protected $multiByte = false;
 
     /**
+     * @var string|null
+     */
+    protected $encoding;
+
+    /**
      * @var int|null
      */
     protected $minLength;
@@ -77,10 +82,6 @@ trait ValidateLength
      */
     private function getEncoding()
     {
-        if (empty($this->encoding)) {
-            return mb_internal_encoding();
-        } else {
-            return $this->encoding;
-        }
+        return $this->encoding;
     }
 }

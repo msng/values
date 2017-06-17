@@ -3,22 +3,32 @@
 namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleMbStringValue;
+use msng\Values\Tests\SampleClasses\SampleSjisMbStringValue;
 use PHPUnit\Framework\TestCase;
 
 class MbStringValueTest extends TestCase
 {
     public function testJustMaxLength()
     {
-        $this->newAndAssertSame('いろはにほへ');
+        $value = 'いろはにほへ';
+        $string = new SampleMbStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     public function testJustMinLength()
     {
-        $this->newAndAssertSame('いろはにほへとち');
+        $value = 'いろはにほへとち';
+        $string = new SampleMbStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     public function testBetweenMinAndMaxLength() {
-        $this->newAndAssertSame('いろはにほへと');
+        $value = 'いろはにほへと';
+        $string = new SampleMbStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -26,7 +36,10 @@ class MbStringValueTest extends TestCase
      */
     public function testOverMaxLength()
     {
-        $this->newAndAssertSame('いろはにほへとちりぬるを');
+        $value = 'いろはにほへとちりぬるを';
+        $string = new SampleMbStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     /**
@@ -34,7 +47,10 @@ class MbStringValueTest extends TestCase
      */
     public function testUnderMinLength()
     {
-        $this->newAndAssertSame('いろは');
+        $value = 'いろは';
+        $string = new SampleMbStringValue($value);
+
+        $this->assertSame($value, $string->get());
     }
 
     public function testToString()
@@ -47,11 +63,22 @@ class MbStringValueTest extends TestCase
         echo $stringValue;
     }
 
-    private function newAndAssertSame($value)
+    public function testDifferentEncodings()
     {
-        $string = new SampleMbStringValue($value);
+        $utf8 = '文字コードテスト';
+        $sjis = mb_convert_encoding($utf8, 'SJIS', mb_internal_encoding());
+        $stringValue = new SampleSjisMbStringValue($utf8);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($sjis, $stringValue->get());
     }
+
+//    /**
+//     * @expectedException \LengthException
+//     */
+//    public function testDifferentEncodingsTooLong()
+//    {
+//        $value = '文字コードのテストです';
+//        $stringValue = new SampleSjisMbStringValue($value);
+//    }
 
 }

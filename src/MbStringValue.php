@@ -10,36 +10,27 @@ class MbStringValue extends StringValue
     protected $multiByte = true;
 
     /**
-     * @var string
-     */
-    protected $encoding;
-
-    /**
      * MbStringValue constructor.
      * @param string $value
-     * @param string|null $toEncoding
      * @param string|null $fromEncoding
-     * @param bool|null $typeCheckMode
      */
-    public function __construct($value, $toEncoding = null, $fromEncoding = null, $typeCheckMode = null)
+    public function __construct($value, $fromEncoding = null)
     {
-        $toEncoding = $this->trimEncoding($toEncoding);
-        $fromEncoding = $this->trimEncoding($fromEncoding);
+        $this->encoding = $this->prepareEncoding($this->encoding);
+        $fromEncoding = $this->prepareEncoding($fromEncoding);
 
-        if ($toEncoding !== $fromEncoding) {
-            $value = mb_convert_encoding($value, $toEncoding, $fromEncoding);
+        if ($this->encoding !== $fromEncoding) {
+            $value = mb_convert_encoding($value, $this->encoding, $fromEncoding);
         }
 
-        $this->encoding = $toEncoding;
-
-        parent::__construct($value, $typeCheckMode);
+        parent::__construct($value);
     }
 
     /**
      * @param string|null $encoding
      * @return string
      */
-    private function trimEncoding($encoding)
+    private function prepareEncoding($encoding)
     {
         if (is_null($encoding)) {
             $encoding = mb_internal_encoding();
