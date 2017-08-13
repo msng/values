@@ -28,6 +28,16 @@ class EnumValueTest extends TestCase
         $this->assertNull($enum->label());
     }
 
+    public function testGetValues()
+    {
+        $this->assertSame([
+            'SPADE' => 1,
+            'HEART' => 2,
+            'DIAMOND' => 3,
+            'CLUB' => 4
+        ], SampleEnum::getValues());
+    }
+
     public function testIncorrectArgument()
     {
         $this->expectException(\InvalidArgumentException::class);

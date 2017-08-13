@@ -25,9 +25,17 @@ abstract class EnumValue extends Value
      */
     public function __construct($value = null)
     {
-        $this->enums = (new \ReflectionClass($this))->getConstants();
+        $this->enums = static::getConstants();
 
         parent::__construct($value);
+    }
+
+    /**
+     * @return array()
+     */
+    private static function getConstants()
+    {
+        return (new \ReflectionClass(static::class))->getConstants();
     }
 
     /**
@@ -40,6 +48,11 @@ abstract class EnumValue extends Value
         }
 
         return null;
+    }
+
+    public static function getValues()
+    {
+        return static::getConstants();
     }
 
     /**
