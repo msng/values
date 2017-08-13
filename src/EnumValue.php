@@ -15,6 +15,11 @@ abstract class EnumValue extends Value
     private $enums;
 
     /**
+     * @var array
+     */
+    protected static $labels = [];
+
+    /**
      * EnumValue constructor.
      * @param mixed|null $value
      */
@@ -23,6 +28,26 @@ abstract class EnumValue extends Value
         $this->enums = (new \ReflectionClass($this))->getConstants();
 
         parent::__construct($value);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function label()
+    {
+        if (array_key_exists($this->value, static::$labels)) {
+            return static::$labels[$this->value];
+        }
+
+        return null;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLabels()
+    {
+        return static::$labels;
     }
 
     /**

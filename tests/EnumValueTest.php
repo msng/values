@@ -14,6 +14,20 @@ class EnumValueTest extends TestCase
         $this->assertSame(SampleEnum::SPADE, $enum->get());
     }
 
+    public function testLabel()
+    {
+        $enum = new SampleEnum(SampleEnum::HEART);
+
+        $this->assertSame('Heart', $enum->label());
+    }
+
+    public function testVoidLabel()
+    {
+        $enum = new SampleEnum(SampleEnum::CLUB);
+
+        $this->assertNull($enum->label());
+    }
+
     public function testIncorrectArgument()
     {
         $this->expectException(\InvalidArgumentException::class);
