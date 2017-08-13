@@ -38,6 +38,14 @@ class EnumValueTest extends TestCase
         ], SampleEnum::getValues());
     }
 
+    public function testIsMethod()
+    {
+        $enum = new SampleEnum(SampleEnum::DIAMOND);
+
+        $this->assertTrue($enum->is(SampleEnum::DIAMOND));
+        $this->assertFalse($enum->is(SampleEnum::SPADE));
+    }
+
     public function testIncorrectArgument()
     {
         $this->expectException(\InvalidArgumentException::class);

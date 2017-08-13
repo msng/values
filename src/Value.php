@@ -49,6 +49,19 @@ abstract class Value
     }
 
     /**
+     * @param mixed $value
+     * @return bool
+     */
+    public function is($value)
+    {
+        if ($this->value === $value) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * @return mixed
      */
     public function __toString()
