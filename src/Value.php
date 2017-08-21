@@ -34,7 +34,8 @@ abstract class Value
      * @param mixed $value
      * @return mixed
      */
-    protected function setFilter($value) {
+    protected function setFilter($value)
+    {
         return $value;
     }
 
@@ -59,6 +60,28 @@ abstract class Value
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param Value $valueObject
+     * @return bool
+     */
+    public function hasSameValueAs(Value $valueObject)
+    {
+        return $this->is($valueObject->value);
+    }
+
+    /**
+     * @param Value $valueObject
+     * @return bool
+     */
+    public function isSameAs(Value $valueObject)
+    {
+        if ($valueObject instanceof static) {
+            return $this->hasSameValueAs($valueObject);
+        }
+
+        return false;
     }
 
     /**
