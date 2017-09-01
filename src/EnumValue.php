@@ -64,6 +64,19 @@ abstract class EnumValue extends Value
     }
 
     /**
+     * @param $key
+     * @return string
+     */
+    public static function getLabelFor($key)
+    {
+        if (! array_key_exists($key, static::$labels)) {
+            throw new \InvalidArgumentException();
+        }
+
+        return static::$labels[$key];
+    }
+
+    /**
      * @param mixed $value
      */
     protected function validate($value)

@@ -14,6 +14,6 @@ class SampleEnum extends EnumValue
     protected static $labels = [
         self::SPADE => 'Spade',
         self::HEART => 'Heart',
-        self::DIAMOND => 'Diamond',
+        self::DIAMOND => 'Diamond'
     ];
 }

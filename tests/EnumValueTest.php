@@ -53,4 +53,11 @@ class EnumValueTest extends TestCase
         new SampleEnum(5);
     }
 
+    public function testGetLabelFor()
+    {
+        $label = SampleEnum::getLabelFor(SampleEnum::DIAMOND);
+
+        $this->assertSame('Diamond', $label);
+    }
+
 }
