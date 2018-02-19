@@ -11,21 +11,21 @@ class EnumValueTest extends TestCase
     {
         $enum = new SampleEnum(SampleEnum::SPADE);
 
-        $this->assertSame(SampleEnum::SPADE, $enum->get());
+        $this->assertSame(SampleEnum::SPADE, $enum->getValue());
     }
 
     public function testLabel()
     {
         $enum = new SampleEnum(SampleEnum::HEART);
 
-        $this->assertSame('Heart', $enum->label());
+        $this->assertSame('Heart', $enum->getLabel());
     }
 
     public function testVoidLabel()
     {
         $enum = new SampleEnum(SampleEnum::CLUB);
 
-        $this->assertNull($enum->label());
+        $this->assertNull($enum->getLabel());
     }
 
     public function testGetValues()

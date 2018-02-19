@@ -14,7 +14,7 @@ class MbStringValueTest extends TestCase
         $value = 'いろはにほへ';
         $string = new SampleMbStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     public function testJustMinLength()
@@ -22,14 +22,14 @@ class MbStringValueTest extends TestCase
         $value = 'いろはにほへとち';
         $string = new SampleMbStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     public function testBetweenMinAndMaxLength() {
         $value = 'いろはにほへと';
         $string = new SampleMbStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -40,7 +40,7 @@ class MbStringValueTest extends TestCase
         $value = 'いろはにほへとちりぬるを';
         $string = new SampleMbStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -51,7 +51,7 @@ class MbStringValueTest extends TestCase
         $value = 'いろは';
         $string = new SampleMbStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     public function testToString()
@@ -70,7 +70,7 @@ class MbStringValueTest extends TestCase
         $sjis = mb_convert_encoding($utf8, 'SJIS', mb_internal_encoding());
         $stringValue = new SampleSjisMbStringValue($utf8);
 
-        $this->assertSame($sjis, $stringValue->get());
+        $this->assertSame($sjis, $stringValue->getValue());
     }
 
     public function testTruncatedString()
@@ -80,7 +80,7 @@ class MbStringValueTest extends TestCase
 
         $stringValue = new SampleTruncatedMbStringValue($value);
 
-        $this->assertSame($expected, $stringValue->get());
+        $this->assertSame($expected, $stringValue->getValue());
     }
 
 }

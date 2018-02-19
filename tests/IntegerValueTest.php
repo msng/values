@@ -13,7 +13,7 @@ class IntegerValueTest extends TestCase
         $value = 123;
         $integerValue = new SampleIntegerValue($value);
 
-        $this->assertSame($value, $integerValue->get());
+        $this->assertSame($value, $integerValue->getValue());
     }
 
     public function testNormalIntegerWithStrictMode()
@@ -21,7 +21,7 @@ class IntegerValueTest extends TestCase
         $value = 123;
         $integerValue = new SampleStrictIntegerValue($value);
 
-        $this->assertSame($value, $integerValue->get());
+        $this->assertSame($value, $integerValue->getValue());
     }
 
     public function testNegativeInteger()
@@ -29,7 +29,7 @@ class IntegerValueTest extends TestCase
         $value = -99;
         $integerValue = new SampleIntegerValue($value);
 
-        $this->assertSame($value, $integerValue->get());
+        $this->assertSame($value, $integerValue->getValue());
 
     }
 
@@ -38,7 +38,7 @@ class IntegerValueTest extends TestCase
         $value = '123';
         $integerValue = new SampleIntegerValue($value);
 
-        $this->assertEquals($value, $integerValue->get());
+        $this->assertEquals($value, $integerValue->getValue());
     }
 
     /**

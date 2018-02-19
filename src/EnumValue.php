@@ -35,19 +35,33 @@ abstract class EnumValue extends Value
      */
     private static function getConstants()
     {
-        return (new \ReflectionClass(static::class))->getConstants();
+        try {
+            return (new \ReflectionClass(static::class))->getConstants();
+        } catch (\ReflectionException $exception) {
+            // Should never happen. Just catch and throw in favor of IDE inspection.
+            throw new \InvalidArgumentException('A \ReflectionException was thrown: ' . $exception->getMessage());
+        }
     }
 
     /**
      * @return string|null
      */
-    public function label()
+    public function getLabel()
     {
         if (array_key_exists($this->value, static::$labels)) {
             return static::$labels[$this->value];
         }
 
         return null;
+    }
+
+    /**
+     * @return null|string
+     * @deprecated Will be removed in the future version; Please use getLabel() instead.
+     */
+    public function label()
+    {
+        return $this->getLabel();
     }
 
     public static function getValues()

@@ -15,13 +15,13 @@ abstract class Value
      */
     public function __construct($value)
     {
-        $this->set($value);
+        $this->setValue($value);
     }
 
     /**
      * @param mixed $value
      */
-    private function set($value)
+    private function setValue($value)
     {
         $this->validate($value);
         $value = $this->setFilter($value);
@@ -42,11 +42,20 @@ abstract class Value
     /**
      * @return mixed
      */
-    public function get()
+    public function getValue()
     {
         $value = $this->value;
 
         return $value;
+    }
+
+    /**
+     * @return mixed
+     * @deprecated Will be removed in the future version; Please use getValue() instead.
+     */
+    public function get()
+    {
+        return $this->getValue();
     }
 
     /**
@@ -89,7 +98,7 @@ abstract class Value
      */
     public function __toString()
     {
-        return (string)$this->get();
+        return (string)$this->getValue();
     }
 
     /**

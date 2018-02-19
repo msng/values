@@ -13,7 +13,7 @@ class StringValueTest extends TestCase
         $value = 'abcdefgh';
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     public function testJustMinLength()
@@ -21,14 +21,14 @@ class StringValueTest extends TestCase
         $value = 'abcdef';
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     public function testBetweenMinAndMaxLength() {
         $value = 'abcdefg';
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -39,7 +39,7 @@ class StringValueTest extends TestCase
         $value = 'abcdefghi';
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -50,7 +50,7 @@ class StringValueTest extends TestCase
         $value = 'abcde';
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -61,7 +61,7 @@ class StringValueTest extends TestCase
         $value = ['a', 'b'];
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -72,7 +72,7 @@ class StringValueTest extends TestCase
         $value = new \stdClass();
         $string = new SampleStringValue($value);
 
-        $this->assertSame($value, $string->get());
+        $this->assertSame($value, $string->getValue());
     }
 
     /**
@@ -88,7 +88,7 @@ class StringValueTest extends TestCase
         $value = 1234567;
         $string = new SampleStringValue($value);
 
-        $this->assertEquals($value, $string->get());
+        $this->assertEquals($value, $string->getValue());
     }
 
     public function testToString()
@@ -116,7 +116,7 @@ class StringValueTest extends TestCase
 
         $stringValue = new SampleTruncatedStringValue($value);
 
-        $this->assertSame($expected, $stringValue->get());
+        $this->assertSame($expected, $stringValue->getValue());
     }
 
 }
