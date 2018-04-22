@@ -10,6 +10,11 @@ abstract class Value
     protected $value;
 
     /**
+     * @var bool Set true to trim() whitespaces the value before validation.
+     */
+    protected $trim = false;
+
+    /**
      * Value constructor.
      * @param mixed $value
      */
@@ -23,6 +28,10 @@ abstract class Value
      */
     private function setValue($value)
     {
+        if ($this->trim === true) {
+            $value = trim($value);
+        }
+
         $this->validate($value);
         $value = $this->setFilter($value);
 
