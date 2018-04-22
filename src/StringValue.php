@@ -4,10 +4,12 @@ namespace msng\Values;
 
 use msng\Values\Traits\Truncate;
 use msng\Values\Traits\ValidateLength;
+use msng\Values\Traits\ValidateRegex;
 
 abstract class StringValue extends ScalarValue
 {
     use ValidateLength;
+    use ValidateRegex;
     use Truncate;
 
     const TRUNCATE_DO = true;
@@ -50,11 +52,15 @@ abstract class StringValue extends ScalarValue
     }
 
     /**
-     * @param mixed $value
+     * @param string $value
      */
     protected function validate($value)
     {
         parent::validate($value);
+
+        if ($this->regex) {
+            $this->validateRegex($value);
+        }
 
         if ($this->truncate === self::TRUNCATE_NOT) {
             $this->validateLength($value);

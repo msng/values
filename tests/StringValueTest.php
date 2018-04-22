@@ -3,6 +3,7 @@ namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleStrictStringValue;
 use msng\Values\Tests\SampleClasses\SampleStringValue;
+use msng\Values\Tests\SampleClasses\SampleStringValueWithRegex;
 use msng\Values\Tests\SampleClasses\SampleTruncatedStringValue;
 use PHPUnit\Framework\TestCase;
 
@@ -117,6 +118,24 @@ class StringValueTest extends TestCase
         $stringValue = new SampleTruncatedStringValue($value);
 
         $this->assertSame($expected, $stringValue->getValue());
+    }
+
+    public function testMatchesRegex()
+    {
+        $value = 'abcd1234';
+        $stringValue = new SampleStringValueWithRegex($value);
+
+        $this->assertSame($value, $stringValue->getValue());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testDoesNotMatchRegex()
+    {
+        $value = '!abcd';
+
+        new SampleStringValueWithRegex($value);
     }
 
 }
