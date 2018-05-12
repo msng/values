@@ -2,12 +2,13 @@
 
 namespace msng\Values;
 
-use msng\Values\Traits\Truncate;
 use msng\Values\Traits\ValidateLength;
+use msng\Values\Traits\ValidateRange;
 
 abstract class IntegerValue extends ScalarValue
 {
     use ValidateLength;
+    use ValidateRange;
 
     /**
      * @var string
@@ -47,6 +48,7 @@ abstract class IntegerValue extends ScalarValue
         parent::validate($value);
 
         $this->validateLength($value);
+        $this->validateRange($value);
     }
 
 }

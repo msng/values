@@ -3,6 +3,7 @@
 namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleIntegerValue;
+use msng\Values\Tests\SampleClasses\SampleIntegerValueWithRange;
 use msng\Values\Tests\SampleClasses\SampleStrictIntegerValue;
 use PHPUnit\Framework\TestCase;
 
@@ -58,6 +59,36 @@ class IntegerValueTest extends TestCase
         $value = '123abc';
 
         new SampleIntegerValue($value);
+    }
+
+    public function testRange()
+    {
+        $values = [1, 50, 100];
+
+        foreach ($values as $value) {
+            $integerValue = new SampleIntegerValueWithRange($value);
+            $this->assertSame($value, $integerValue->getValue());
+        }
+    }
+
+    /**
+     * @expectedException \UnexpectedValueException
+     */
+    public function testUnderMin()
+    {
+        $value = 0;
+
+        new SampleIntegerValueWithRange($value);
+    }
+
+    /**
+     * @expectedException \UnexpectedValueException
+     */
+    public function testOverMax()
+    {
+        $value = 101;
+
+        new SampleIntegerValueWithRange($value);
     }
 
 }
