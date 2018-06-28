@@ -4,6 +4,12 @@ namespace msng\Values\Tests\SampleClasses;
 
 use msng\Values\EnumValue;
 
+/**
+ * @method static static SPADE()
+ * @method static static HEART()
+ * @method static static DIAMOND()
+ * @method static static CLUB()
+ */
 class SampleEnum extends EnumValue
 {
     const SPADE = 1;

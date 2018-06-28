@@ -52,4 +52,15 @@ class EnumValueTest extends TestCase
         $this->assertSame('Diamond', $label);
     }
 
+    public function testStaticNew()
+    {
+        $spade = new SampleEnum(SampleEnum::SPADE);
+        $diamond = new SampleEnum(SampleEnum::DIAMOND);
+
+        $spadeStaticNew = SampleEnum::SPADE();
+
+        $this->assertTrue($spadeStaticNew->isSameAs($spade));
+        $this->assertFalse($spadeStaticNew->isSameAs($diamond));
+    }
+
 }

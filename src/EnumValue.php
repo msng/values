@@ -91,6 +91,19 @@ abstract class EnumValue extends Value
     }
 
     /**
+     * @param $name
+     * @param $arguments
+     * @return static
+     */
+    final public static function __callStatic($name, $arguments)
+    {
+        $class = static::class;
+        $const = constant("$class::$name");
+
+        return new static($const);
+    }
+
+    /**
      * @param mixed $value
      */
     protected function validate($value)
