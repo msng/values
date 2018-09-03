@@ -63,4 +63,23 @@ class EnumValueTest extends TestCase
         $this->assertFalse($spadeStaticNew->isSameAs($diamond));
     }
 
+    public function testIs()
+    {
+        $heart = SampleEnum::HEART();
+
+        $this->assertTrue($heart->isHEART());
+        $this->assertFalse($heart->isSPADE());
+    }
+
+    /**
+     * @expectedException \BadMethodCallException
+     */
+    public function testIsUndefined()
+    {
+        $diamond = SampleEnum::DIAMOND();
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $diamond->isRUBY();
+    }
+
 }

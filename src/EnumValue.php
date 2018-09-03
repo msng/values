@@ -97,10 +97,31 @@ abstract class EnumValue extends Value
      */
     final public static function __callStatic($name, $arguments)
     {
-        $class = static::class;
-        $const = constant("$class::$name");
+        $value = constant("static::$name");
 
-        return new static($const);
+        return new static($value);
+    }
+
+    /**
+     * @param $name
+     * @param $arguments
+     * @return bool
+     * @throws \Exception
+     */
+    final public function __call($name, $arguments)
+    {
+        $is = 'is';
+
+        if (strpos($name, $is) === 0) {
+            $constName = substr($name, strlen($is));
+            $const = "static::$constName";
+
+            if (defined("static::$constName")) {
+                return $this->value === constant($const);
+            }
+        }
+
+        throw new \BadMethodCallException("Call to undefined method " . static::class . '::' . $name . '()');
     }
 
     /**

@@ -9,6 +9,8 @@ use msng\Values\EnumValue;
  * @method static static HEART()
  * @method static static DIAMOND()
  * @method static static CLUB()
+ * @method bool isSPADE()
+ * @method bool isHEART()
  */
 class SampleEnum extends EnumValue
 {
