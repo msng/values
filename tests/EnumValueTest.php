@@ -3,6 +3,7 @@
 namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleEnum;
+use msng\Values\Tests\SampleClasses\SampleEnumUnderscore;
 use PHPUnit\Framework\TestCase;
 
 class EnumValueTest extends TestCase
@@ -69,6 +70,14 @@ class EnumValueTest extends TestCase
 
         $this->assertTrue($heart->isHEART());
         $this->assertFalse($heart->isSPADE());
+    }
+
+    public function testIsAlias()
+    {
+        $firstValue = new SampleEnumUnderscore(SampleEnumUnderscore::FIRST_VALUE);
+
+        $this->assertTrue($firstValue->isFirstValue());
+        $this->assertFalse($firstValue->isSecondValue());
     }
 
     /**

@@ -119,6 +119,13 @@ abstract class EnumValue extends Value
             if (defined("static::$constName")) {
                 return $this->value === constant($const);
             }
+
+            $constName = ltrim(strtoupper(preg_replace('/([A-Z])/', '_$1', $constName)), '_');
+            $const = "static::$constName";
+
+            if (defined("static::$constName")) {
+                return $this->value === constant($const);
+            }
         }
 
         throw new \BadMethodCallException("Call to undefined method " . static::class . '::' . $name . '()');
