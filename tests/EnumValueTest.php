@@ -91,4 +91,10 @@ class EnumValueTest extends TestCase
         $diamond->isRUBY();
     }
 
+    public function testAccepts()
+    {
+        $this->assertTrue(SampleEnum::accepts(1));
+        $this->assertFalse(SampleEnum::accepts(8));
+    }
+
 }

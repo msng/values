@@ -91,6 +91,15 @@ abstract class EnumValue extends Value
     }
 
     /**
+     * @param $value
+     * @return bool
+     */
+    public static function accepts($value)
+    {
+        return in_array($value, static::getConstants());
+    }
+
+    /**
      * @param $name
      * @param $arguments
      * @return static
@@ -144,7 +153,7 @@ abstract class EnumValue extends Value
      */
     private function validateEnum($value)
     {
-        if (! in_array($value, $this->enums)) {
+        if (! static::accepts($value)) {
             throw new \InvalidArgumentException(sprintf('Value for %s must be one of (%s); "%s" given.', get_class($this), implode('|', $this->enums), $value));
         }
     }
