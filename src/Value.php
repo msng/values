@@ -59,15 +59,6 @@ abstract class Value
     }
 
     /**
-     * @return mixed
-     * @deprecated Will be removed in the future version; Please use getValue() instead.
-     */
-    public function get()
-    {
-        return $this->getValue();
-    }
-
-    /**
      * @param mixed $value
      * @return bool
      */

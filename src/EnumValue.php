@@ -55,15 +55,6 @@ abstract class EnumValue extends Value
         return null;
     }
 
-    /**
-     * @return null|string
-     * @deprecated Will be removed in the future version; Please use getLabel() instead.
-     */
-    public function label()
-    {
-        return $this->getLabel();
-    }
-
     public static function getValues()
     {
         return static::getConstants();
