@@ -9,7 +9,9 @@
             "email": "ray@msng.info"
         }
     ],
-    "require": {},
+    "require": {
+      "ext-mbstring": "*"
+    },
     "require-dev": {
         "phpunit/phpunit": "^5.7 || ^6.2"
     },
