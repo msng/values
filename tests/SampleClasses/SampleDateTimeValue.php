@@ -6,5 +6,5 @@ use msng\Values\DateTimeValue;
 
 class SampleDateTimeValue extends DateTimeValue
 {
-
+    protected $acceptsFuture = false;
 }

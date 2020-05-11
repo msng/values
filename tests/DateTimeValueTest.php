@@ -24,4 +24,11 @@ class DateTimeValueTest extends TestCase
         new SampleDateTimeValue(new stdClass());
 
     }
+
+    public function testUnacceptableFuture()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $future = (new DateTime())->setTimestamp(time() + 100);
+        new SampleDateTimeValue($future);
+    }
 }
