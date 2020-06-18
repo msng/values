@@ -1,6 +1,8 @@
 <?php
 namespace msng\Values\Tests;
 
+use InvalidArgumentException;
+use msng\Values\Tests\SampleClasses\SampleNullableStringValue;
 use msng\Values\Tests\SampleClasses\SampleStrictStringValue;
 use msng\Values\Tests\SampleClasses\SampleStringValue;
 use msng\Values\Tests\SampleClasses\SampleStringValueWithRegex;
@@ -55,7 +57,7 @@ class StringValueTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testArray()
     {
@@ -66,7 +68,7 @@ class StringValueTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testObject()
     {
@@ -77,7 +79,7 @@ class StringValueTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testIntegerWithStrictMode()
     {
@@ -129,7 +131,7 @@ class StringValueTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
+     * @expectedException InvalidArgumentException
      */
     public function testDoesNotMatchRegex()
     {
@@ -138,4 +140,9 @@ class StringValueTest extends TestCase
         new SampleStringValueWithRegex($value);
     }
 
+    public function testNullableString()
+    {
+        $nullableStringValue = new SampleNullableStringValue(null);
+        $this->assertNull($nullableStringValue->getValue());
+    }
 }

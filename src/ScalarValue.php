@@ -19,6 +19,8 @@ abstract class ScalarValue extends Value
      */
     protected $typeCheck;
 
+    protected $nullable = false;
+
     /**
      * @param mixed $value
      */
@@ -32,6 +34,10 @@ abstract class ScalarValue extends Value
      */
     protected function validateType($value)
     {
+        if ($this->nullable === true && is_null($value)) {
+            return;
+        }
+
         if (($this->typeCheck === self::TYPE_CHECK_STRICT) && (gettype($value) !== $this->type)) {
             throw new \InvalidArgumentException(sprintf('The value for %s must be %s; %s given.', get_class($this), $this->type, gettype($value)));
         }
