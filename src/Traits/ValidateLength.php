@@ -3,15 +3,8 @@ namespace msng\Values\Traits;
 
 trait ValidateLength
 {
-    /**
-     * @var int|null
-     */
-    protected $minLength;
-
-    /**
-     * @var int|null
-     */
-    protected $maxLength;
+    protected int $minLength;
+    protected int $maxLength;
 
     /**
      * @param $value
@@ -27,7 +20,7 @@ trait ValidateLength
      */
     private function validateMinLength($value)
     {
-        if ($this->minLength) {
+        if (isset($this->minLength)) {
             if ($this->strlen($value) < $this->minLength) {
                 throw new \LengthException(sprintf('The minimum length of the value for %s is %d; "%s" given.', __CLASS__, $this->minLength, $value));
             }
@@ -39,7 +32,7 @@ trait ValidateLength
      */
     private function validateMaxLength($value)
     {
-        if ($this->maxLength) {
+        if (isset($this->maxLength)) {
             if ($this->strlen($value) > $this->maxLength) {
                 throw new \LengthException(sprintf('The maximum length of the value for %s is %d; "%s" given.', __CLASS__, $this->maxLength, $value));
             }
@@ -47,10 +40,10 @@ trait ValidateLength
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return int
      */
-    protected function strlen($value)
+    protected function strlen(string $value): int
     {
         return strlen($value);
     }

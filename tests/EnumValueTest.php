@@ -22,6 +22,12 @@ class EnumValueTest extends TestCase
         $this->assertSame('Heart', $enum->getLabel());
     }
 
+    public function testGetLabels()
+    {
+        $labels = SampleEnum::getLabels();
+        $this->assertSame(3, count($labels));
+    }
+
     public function testVoidLabel()
     {
         $enum = new SampleEnum(SampleEnum::CLUB);

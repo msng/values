@@ -7,7 +7,7 @@ abstract class EmailValue extends StringValue
     /**
      * @var bool Set true to trim() whitespaces the value before validation.
      */
-    protected $trim = true;
+    protected bool $trim = true;
 
     /**
      * @param string $value

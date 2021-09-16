@@ -6,6 +6,6 @@ use msng\Values\StringValue;
 
 class SampleStringValue extends StringValue
 {
-    protected $minLength = 6;
-    protected $maxLength = 8;
+    protected int $minLength = 6;
+    protected int $maxLength = 8;
 }

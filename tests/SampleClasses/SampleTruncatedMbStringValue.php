@@ -6,7 +6,7 @@ use msng\Values\MbStringValue;
 
 class SampleTruncatedMbStringValue extends MbStringValue
 {
-    protected $minLength = 6;
-    protected $maxLength = 8;
-    protected $truncate = true;
+    protected int $minLength = 6;
+    protected int $maxLength = 8;
+    protected bool $truncate = true;
 }

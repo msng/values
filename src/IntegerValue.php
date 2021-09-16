@@ -5,39 +5,24 @@ namespace msng\Values;
 use msng\Values\Traits\ValidateLength;
 use msng\Values\Traits\ValidateRange;
 
+/**
+ * @method int getValue()
+ */
 abstract class IntegerValue extends ScalarValue
 {
     use ValidateLength;
     use ValidateRange;
 
-    /**
-     * @var string
-     */
-    protected $type = 'integer';
-
-    /**
-     * @var bool
-     */
-    protected $typeCheck = self::TYPE_CHECK_LOOSE;
-
-    /**
-     * IntegerValue constructor.
-     * @param int|string $value
-     */
-    public function __construct($value)
-    {
-        parent::__construct($value);
-    }
+    protected string $type = 'integer';
+    protected int $typeCheck = self::TYPE_CHECK_STRICT;
 
     /**
      * @param string|int $value
      * @return int
      */
-    protected function setFilter($value)
+    protected function setFilter($value): int
     {
-        $value = filter_var($value, FILTER_VALIDATE_INT);
-
-        return $value;
+        return filter_var($value, FILTER_VALIDATE_INT);
     }
 
     /**
@@ -50,5 +35,4 @@ abstract class IntegerValue extends ScalarValue
         $this->validateLength($value);
         $this->validateRange($value);
     }
-
 }

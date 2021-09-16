@@ -6,5 +6,5 @@ use msng\Values\IntegerValue;
 
 class SampleStrictIntegerValue extends IntegerValue
 {
-    protected $typeCheck = self::TYPE_CHECK_STRICT;
+    protected int $typeCheck = self::TYPE_CHECK_STRICT;
 }

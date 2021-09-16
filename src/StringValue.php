@@ -6,33 +6,24 @@ use msng\Values\Traits\Truncate;
 use msng\Values\Traits\ValidateLength;
 use msng\Values\Traits\ValidateRegex;
 
+/**
+ * @method string getValue()
+ */
 abstract class StringValue extends ScalarValue
 {
     use ValidateLength;
     use ValidateRegex;
     use Truncate;
 
-    const TRUNCATE_DO = true;
-    const TRUNCATE_NOT = false;
-
-    /**
-     * @var string
-     */
-    protected $type = 'string';
-
-    /**
-     * @var bool
-     */
-    protected $typeCheck = self::TYPE_CHECK_LOOSE;
+    protected string $type = 'string';
+    protected int $typeCheck = self::TYPE_CHECK_LOOSE;
 
     /**
      * Too long string is automatically truncated or not
-     *  - self::TRUNCATE_DO : $value is truncated to the length of $maxLength
-     *  - self::TRUNCATE_NOT : LengthException is thrown if $value is longer than $maxLength
-     *
-     * @var bool
+     *  - true: $value is truncated to the length of $maxLength
+     *  - false: LengthException is thrown if $value is longer than $maxLength
      */
-    protected $truncate = self::TRUNCATE_NOT;
+    protected bool $truncate = false;
 
     /**
      * @param mixed $value
@@ -43,7 +34,7 @@ abstract class StringValue extends ScalarValue
         if (is_scalar($value)) {
             $value = (string)$value;
 
-            if ($this->truncate === self::TRUNCATE_DO) {
+            if ($this->truncate === true) {
                 $value = $this->truncate($value);
             }
         }
@@ -58,11 +49,11 @@ abstract class StringValue extends ScalarValue
     {
         parent::validate($value);
 
-        if ($this->regex) {
+        if (isset($this->regex)) {
             $this->validateRegex($value);
         }
 
-        if ($this->truncate === self::TRUNCATE_NOT) {
+        if ($this->truncate === false) {
             $this->validateLength($value);
         }
     }

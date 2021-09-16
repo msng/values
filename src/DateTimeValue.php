@@ -9,9 +9,8 @@ use DateTimeInterface;
  */
 abstract class DateTimeValue extends ObjectValue
 {
-    protected $class = DateTimeInterface::class;
-
-    protected $acceptsFuture = true;
+    protected string $class = DateTimeInterface::class;
+    protected bool $acceptsFuture = true;
 
     /**
      * @param DateTimeInterface $value
@@ -27,7 +26,7 @@ abstract class DateTimeValue extends ObjectValue
         }
     }
 
-    private function isFuture(DateTimeInterface $value)
+    private function isFuture(DateTimeInterface $value): bool
     {
         return $value->getTimestamp() > time();
     }

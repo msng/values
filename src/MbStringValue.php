@@ -11,24 +11,19 @@ class MbStringValue extends StringValue
      * How characters are counted at length validation or truncate
      *  - self::COUNT_MULTI_BYTE : count characters as multi-byte
      *  - self::COUNT_BYTE : count in bytes
-     *
-     * @var int
      */
-    protected $count = self::COUNT_MULTI_BYTE;
+    protected int $count = self::COUNT_MULTI_BYTE;
 
-    /**
-     * @var string
-     */
-    protected $encoding;
+    protected string $encoding;
 
     /**
      * MbStringValue constructor.
      * @param string $value
      * @param string|null $fromEncoding
      */
-    public function __construct($value, $fromEncoding = null)
+    public function __construct($value, string $fromEncoding = null)
     {
-        $this->encoding = $this->prepareEncoding($this->encoding);
+        $this->encoding = $this->prepareEncoding($this->encoding ?? null);
         $fromEncoding = $this->prepareEncoding($fromEncoding);
 
         if ($this->encoding !== $fromEncoding) {
@@ -42,7 +37,7 @@ class MbStringValue extends StringValue
      * @param string|null $encoding
      * @return string
      */
-    private function prepareEncoding($encoding)
+    private function prepareEncoding(?string $encoding): ?string
     {
         if (is_null($encoding)) {
             $encoding = mb_internal_encoding();
@@ -52,10 +47,10 @@ class MbStringValue extends StringValue
     }
 
     /**
-     * @param $value
+     * @param string $value
      * @return int
      */
-    protected function strlen($value)
+    protected function strlen(string $value): int
     {
         if ($this->count === self::COUNT_MULTI_BYTE) {
             return mb_strlen($value, $this->getEncoding());
@@ -68,9 +63,9 @@ class MbStringValue extends StringValue
      * @param mixed $value
      * @param int $start
      * @param null $length
-     * @return bool|mixed|string
+     * @return bool|string
      */
-    protected function substr($value, $start, $length = null)
+    protected function substr($value, int $start, $length = null)
     {
         if ($this->count === self::COUNT_MULTI_BYTE) {
             $value = mb_substr($value, 0, $this->maxLength, $this->getEncoding());
@@ -84,10 +79,8 @@ class MbStringValue extends StringValue
     /**
      * @return string
      */
-    private function getEncoding()
+    private function getEncoding(): ?string
     {
         return $this->encoding;
     }
-
-
 }

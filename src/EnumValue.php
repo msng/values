@@ -9,15 +9,8 @@ namespace msng\Values;
  */
 abstract class EnumValue extends Value
 {
-    /**
-     * @var array
-     */
-    private $enums;
-
-    /**
-     * @var array
-     */
-    protected static $labels = [];
+    private array $enums;
+    protected static array $labels = [];
 
     /**
      * EnumValue constructor.
@@ -33,20 +26,15 @@ abstract class EnumValue extends Value
     /**
      * @return array()
      */
-    private static function getConstants()
+    private static function getConstants(): array
     {
-        try {
-            return (new \ReflectionClass(static::class))->getConstants();
-        } catch (\ReflectionException $exception) {
-            // Should never happen. Just catch and throw in favor of IDE inspection.
-            throw new \InvalidArgumentException('A \ReflectionException was thrown: ' . $exception->getMessage());
-        }
+        return (new \ReflectionClass(static::class))->getConstants();
     }
 
     /**
      * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         if (array_key_exists($this->value, static::$labels)) {
             return static::$labels[$this->value];
@@ -55,7 +43,7 @@ abstract class EnumValue extends Value
         return null;
     }
 
-    public static function getValues()
+    public static function getValues(): array
     {
         return static::getConstants();
     }
@@ -63,7 +51,7 @@ abstract class EnumValue extends Value
     /**
      * @return array
      */
-    public static function getLabels()
+    public static function getLabels(): array
     {
         return static::$labels;
     }
@@ -72,7 +60,7 @@ abstract class EnumValue extends Value
      * @param $key
      * @return string
      */
-    public static function getLabelFor($key)
+    public static function getLabelFor($key): string
     {
         if (! array_key_exists($key, static::$labels)) {
             throw new \InvalidArgumentException();
@@ -85,7 +73,7 @@ abstract class EnumValue extends Value
      * @param $value
      * @return bool
      */
-    public static function accepts($value)
+    public static function accepts($value): bool
     {
         return in_array($value, static::getConstants());
     }

@@ -4,6 +4,7 @@ namespace msng\Values\Tests;
 
 use msng\Values\Tests\SampleClasses\SampleIntegerValue;
 use msng\Values\Tests\SampleClasses\SampleIntegerValueWithRange;
+use msng\Values\Tests\SampleClasses\SampleLooseIntegerValue;
 use msng\Values\Tests\SampleClasses\SampleStrictIntegerValue;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +38,7 @@ class IntegerValueTest extends TestCase
     public function testStringWithLooseMode()
     {
         $value = '123';
-        $integerValue = new SampleIntegerValue($value);
+        $integerValue = new SampleLooseIntegerValue($value);
 
         $this->assertEquals($value, $integerValue->getValue());
     }

@@ -6,5 +6,5 @@ use msng\Values\StringValue;
 
 class SampleNullableStringValue extends StringValue
 {
-    protected $nullable = true;
+    protected bool $nullable = true;
 }

@@ -6,6 +6,6 @@ use msng\Values\IntegerValue;
 
 class SampleIntegerValueWithRange extends IntegerValue
 {
-    protected $min = 1;
-    protected $max = 100;
+    protected int $min = 1;
+    protected int $max = 100;
 }

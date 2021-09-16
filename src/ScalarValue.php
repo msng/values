@@ -4,22 +4,22 @@ namespace msng\Values;
 
 abstract class ScalarValue extends Value
 {
-    const TYPE_CHECK_STRICT = true;
-    const TYPE_CHECK_LOOSE = false;
+    const TYPE_CHECK_STRICT = 1;
+    const TYPE_CHECK_LOOSE = 2;
 
     /**
      * @var string Expected type; must be assigned in the using class.
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Type check mode
      *  - self::TYPE_CHECK_STRICT : the type of $value must be the same as expected type
      *  - self::TYPE_CHECK_LOOSE : any $value is converted to expected type
      */
-    protected $typeCheck;
+    protected int $typeCheck = self::TYPE_CHECK_STRICT;
 
-    protected $nullable = false;
+    protected bool $nullable = false;
 
     /**
      * @param mixed $value

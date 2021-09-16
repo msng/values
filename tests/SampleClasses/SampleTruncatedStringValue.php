@@ -6,7 +6,7 @@ use msng\Values\StringValue;
 
 class SampleTruncatedStringValue extends StringValue
 {
-    protected $minLength = 6;
-    protected $maxLength = 8;
-    protected $truncate = true;
+    protected int $minLength = 6;
+    protected int $maxLength = 8;
+    protected bool $truncate = true;
 }

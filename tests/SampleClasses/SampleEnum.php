@@ -19,7 +19,7 @@ class SampleEnum extends EnumValue
     const DIAMOND = 3;
     const CLUB = 4;
 
-    protected static $labels = [
+    protected static array $labels = [
         self::SPADE => 'Spade',
         self::HEART => 'Heart',
         self::DIAMOND => 'Diamond'

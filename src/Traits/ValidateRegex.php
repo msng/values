@@ -4,10 +4,7 @@ namespace msng\Values\Traits;
 
 trait ValidateRegex
 {
-    /**
-     * @var string|null
-     */
-    protected $regex;
+    protected string $regex;
 
     /**
      * @param $value

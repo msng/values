@@ -9,22 +9,18 @@ trait Truncate
 {
     protected function truncate($value)
     {
-        $value = $this->substr($value, 0, $this->maxLength);
-
-        return $value;
+        return $this->substr($value, 0, $this->maxLength);
     }
 
     /**
      * @param mixed $value
      * @param int $start
      * @param int|null $length
-     * @return mixed
+     * @return false|string
      */
-    protected function substr($value, $start, $length = null)
+    protected function substr($value, int $start, int $length = null)
     {
-        $value = substr($value, $start, $length);
-
-        return $value;
+        return substr($value, $start, $length);
     }
 
 }

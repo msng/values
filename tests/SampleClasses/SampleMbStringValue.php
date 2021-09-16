@@ -6,6 +6,6 @@ use msng\Values\MbStringValue;
 
 class SampleMbStringValue extends MbStringValue
 {
-    protected $minLength = 6;
-    protected $maxLength = 8;
+    protected int $minLength = 6;
+    protected int $maxLength = 8;
 }

@@ -6,7 +6,7 @@ use InvalidArgumentException;
 
 abstract class ObjectValue extends Value
 {
-    protected $class;
+    protected string $class;
 
     protected function validate($value)
     {

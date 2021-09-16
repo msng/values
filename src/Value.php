@@ -12,7 +12,7 @@ abstract class Value
     /**
      * @var bool Set true to trim() whitespaces the value before validation.
      */
-    protected $trim = false;
+    protected bool $trim = false;
 
     /**
      * Value constructor.
@@ -53,16 +53,14 @@ abstract class Value
      */
     public function getValue()
     {
-        $value = $this->value;
-
-        return $value;
+        return $this->value;
     }
 
     /**
      * @param mixed $value
      * @return bool
      */
-    public function is($value)
+    public function is($value): bool
     {
         if ($this->value === $value) {
             return true;
@@ -75,7 +73,7 @@ abstract class Value
      * @param Value $valueObject
      * @return bool
      */
-    public function hasSameValueAs(Value $valueObject)
+    public function hasSameValueAs(Value $valueObject): bool
     {
         return $this->is($valueObject->value);
     }
@@ -84,7 +82,7 @@ abstract class Value
      * @param Value $valueObject
      * @return bool
      */
-    public function isSameAs(Value $valueObject)
+    public function isSameAs(Value $valueObject): bool
     {
         if ($valueObject instanceof static) {
             return $this->hasSameValueAs($valueObject);
@@ -94,7 +92,7 @@ abstract class Value
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function __toString()
     {
